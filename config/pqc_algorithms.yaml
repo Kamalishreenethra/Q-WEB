@@ -1,0 +1,48 @@
+# SignChain PQC Standardized Algorithm Knowledge Base
+# Structured metadata for post-quantum digital signature algorithms
+
+pqc_algorithms:
+  - name: ML-DSA-44
+    standard_status: NIST FIPS 204 Standardized
+    algorithm_family: PQC_LATTICE
+    signature_role: General Purpose Code Signing (Category 1)
+    quantum_security_position: NIST Security Level 1 (AES-128 Equivalent)
+    implementation_available: true
+    migration_notes: Recommended for general purpose code signing requiring low public key and signature overhead.
+    compatibility_notes: Standardized in NIST FIPS 204. Primary candidate replacement for RSA-2048 and ECDSA P-256.
+
+  - name: ML-DSA-65
+    standard_status: NIST FIPS 204 Standardized
+    algorithm_family: PQC_LATTICE
+    signature_role: General Purpose Code Signing (Category 3 - Recommended)
+    quantum_security_position: NIST Security Level 3 (AES-192 Equivalent)
+    implementation_available: true
+    migration_notes: Primary recommended post-quantum signature target for enterprise software supply chains.
+    compatibility_notes: High security margin with balanced key size and signature generation speed.
+
+  - name: ML-DSA-87
+    standard_status: NIST FIPS 204 Standardized
+    algorithm_family: PQC_LATTICE
+    signature_role: High Security Code Signing (Category 5)
+    quantum_security_position: NIST Security Level 5 (AES-256 Equivalent)
+    implementation_available: true
+    migration_notes: Maximum security post-quantum signature for high-consequence root CAs and master signers.
+    compatibility_notes: Larger public key and signature size compared to ML-DSA-65.
+
+  - name: SLH-DSA-SHA2-128f
+    standard_status: NIST FIPS 205 Standardized
+    algorithm_family: PQC_STATELESS_HASH
+    signature_role: Backup / Hash-Based Code Signing
+    quantum_security_position: NIST Security Level 1 (AES-128 Equivalent)
+    implementation_available: true
+    migration_notes: Conservative fallback scheme relying only on secure cryptographic hash functions (SHA-2).
+    compatibility_notes: Standardized in NIST FIPS 205. Larger signature sizes (17 KB) require storage optimization.
+
+  - name: SLH-DSA-SHA2-256f
+    standard_status: NIST FIPS 205 Standardized
+    algorithm_family: PQC_STATELESS_HASH
+    signature_role: High Security Hash-Based Code Signing
+    quantum_security_position: NIST Security Level 5 (AES-256 Equivalent)
+    implementation_available: true
+    migration_notes: Conservative fallback scheme for long-term root CA certificate signatures.
+    compatibility_notes: Extremely robust mathematical assumptions independent of lattice hardness.

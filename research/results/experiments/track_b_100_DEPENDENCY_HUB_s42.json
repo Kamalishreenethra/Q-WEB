@@ -1,0 +1,92 @@
+{
+  "experiment_id": "track_b_100_DEPENDENCY_HUB_seed42",
+  "timestamp_utc": "2026-08-16T15:42:54.248120+00:00",
+  "workload_size": 100,
+  "seed": 42,
+  "scenario_family": "DEPENDENCY_HUB",
+  "certificate_count": 20,
+  "graph_nodes": 120,
+  "graph_edges": 131,
+  "ground_truth_count": 20,
+  "critical_targets_count": 1,
+  "baseline": {
+    "recall@5": 0.2,
+    "recall@10": 0.7,
+    "recall@20": 1.0,
+    "spearman_rho": 0.0331,
+    "spearman_pval": 0.889876,
+    "priority_inversions": 92,
+    "critical_miss_rate_top10": 1.0,
+    "high_impact_recall_top10": 0.4,
+    "order_agreement": 0.5158
+  },
+  "signchain": {
+    "recall@5": 0.4,
+    "recall@10": 0.7,
+    "recall@20": 1.0,
+    "spearman_rho": 0.6481,
+    "spearman_pval": 0.001999,
+    "priority_inversions": 48,
+    "critical_miss_rate_top10": 0.0,
+    "high_impact_recall_top10": 1.0,
+    "order_agreement": 0.7474
+  },
+  "ablation": {
+    "baseline": {
+      "recall@5": 0.2,
+      "recall@10": 0.7,
+      "recall@20": 1.0,
+      "spearman_rho": 0.0331,
+      "spearman_pval": 0.889876,
+      "priority_inversions": 92,
+      "critical_miss_rate_top10": 1.0,
+      "high_impact_recall_top10": 0.4,
+      "order_agreement": 0.5158
+    },
+    "model_a_crypto_only": {
+      "recall@5": 0.2,
+      "recall@10": 0.7,
+      "recall@20": 1.0,
+      "spearman_rho": 0.2752,
+      "spearman_pval": 0.240283,
+      "priority_inversions": 73,
+      "critical_miss_rate_top10": 1.0,
+      "high_impact_recall_top10": 0.5,
+      "order_agreement": 0.6158
+    },
+    "model_b_crypto_dep": {
+      "recall@5": 0.4,
+      "recall@10": 0.7,
+      "recall@20": 1.0,
+      "spearman_rho": 0.6466,
+      "spearman_pval": 0.002064,
+      "priority_inversions": 49,
+      "critical_miss_rate_top10": 0.0,
+      "high_impact_recall_top10": 1.0,
+      "order_agreement": 0.7421
+    },
+    "model_c_crypto_dep_readiness": {
+      "recall@5": 0.4,
+      "recall@10": 0.7,
+      "recall@20": 1.0,
+      "spearman_rho": 0.6481,
+      "spearman_pval": 0.001999,
+      "priority_inversions": 48,
+      "critical_miss_rate_top10": 0.0,
+      "high_impact_recall_top10": 1.0,
+      "order_agreement": 0.7474
+    },
+    "model_d_full_signchain": {
+      "recall@5": 0.4,
+      "recall@10": 0.7,
+      "recall@20": 1.0,
+      "spearman_rho": 0.6481,
+      "spearman_pval": 0.001999,
+      "priority_inversions": 48,
+      "critical_miss_rate_top10": 0.0,
+      "high_impact_recall_top10": 1.0,
+      "order_agreement": 0.7474
+    }
+  },
+  "outcome": "SIGNCHAIN_WIN"
+}

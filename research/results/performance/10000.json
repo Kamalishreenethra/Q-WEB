@@ -1,0 +1,60 @@
+{
+  "environment": {
+    "os": "Windows",
+    "os_release": "11",
+    "os_version": "10.0.26200",
+    "architecture": "AMD64",
+    "python_version": "3.13.7",
+    "cpu_count_logical": 12,
+    "cpu_count_physical": 10,
+    "total_ram_gb": 15.65,
+    "timestamp_utc": "2026-08-16T15:42:02.196118+00:00",
+    "signchain_version": "0.1.0"
+  },
+  "metrics": {
+    "workload_size": 10000,
+    "artifacts_count": 10000,
+    "certificates_count": 2000,
+    "nodes_count": 12000,
+    "edges_count": 12078,
+    "total_time_mean_sec": 1.730082,
+    "total_time_median_sec": 1.700082,
+    "total_time_stddev_sec": 0.069414,
+    "total_time_min_sec": 1.665451,
+    "total_time_max_sec": 1.837101,
+    "migration_time_mean_sec": 1.551157,
+    "migration_time_median_sec": 1.54827,
+    "graph_time_mean_sec": 0.178916,
+    "peak_memory_mean_mb": 12.5263,
+    "peak_memory_max_mb": 12.5307,
+    "repetitions": 5
+  },
+  "raw_pipeline_times": [
+    1.6873755000415258,
+    1.8371005000080913,
+    1.7603999000275508,
+    1.6654509999789298,
+    1.7000820999965072
+  ],
+  "raw_graph_times": [
+    0.10821350000333041,
+    0.1781343999900855,
+    0.2121237000101246,
+    0.19441449997248128,
+    0.20169489999534562
+  ],
+  "raw_migration_times": [
+    1.5791519000194967,
+    1.6589569000061601,
+    1.5482701999717392,
+    1.4710297000128776,
+    1.4983751999679953
+  ],
+  "raw_memory_mb": [
+    12.524593353271484,
+    12.529985427856445,
+    12.52114486694336,
+    12.525039672851562,
+    12.53072738647461
+  ]
+}

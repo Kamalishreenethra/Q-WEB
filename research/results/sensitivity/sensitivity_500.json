@@ -1,0 +1,62 @@
+{
+  "GT-A (Criticality-Heavy)": {
+    "weights": {
+      "w_crit": 0.6,
+      "w_vuln": 0.2,
+      "w_blast": 0.2
+    },
+    "baseline_recall_10": 0.1,
+    "signchain_recall_10": 0.2,
+    "baseline_inversions": 2098,
+    "signchain_inversions": 1535,
+    "baseline_rho": 0.2199,
+    "signchain_rho": 0.5221,
+    "delta_inversions": 563,
+    "delta_recall": 0.1
+  },
+  "GT-B (Vulnerability-Heavy)": {
+    "weights": {
+      "w_crit": 0.15,
+      "w_vuln": 0.7,
+      "w_blast": 0.15
+    },
+    "baseline_recall_10": 0.2,
+    "signchain_recall_10": 0.6,
+    "baseline_inversions": 2008,
+    "signchain_inversions": 1115,
+    "baseline_rho": 0.2652,
+    "signchain_rho": 0.7048,
+    "delta_inversions": 893,
+    "delta_recall": 0.39999999999999997
+  },
+  "GT-C (Blast-Radius-Heavy)": {
+    "weights": {
+      "w_crit": 0.15,
+      "w_vuln": 0.15,
+      "w_blast": 0.7
+    },
+    "baseline_recall_10": 0.3,
+    "signchain_recall_10": 0.8,
+    "baseline_inversions": 1998,
+    "signchain_inversions": 701,
+    "baseline_rho": 0.272,
+    "signchain_rho": 0.8523,
+    "delta_inversions": 1297,
+    "delta_recall": 0.5
+  },
+  "GT-D (Balanced Standard)": {
+    "weights": {
+      "w_crit": 0.35,
+      "w_vuln": 0.35,
+      "w_blast": 0.3
+    },
+    "baseline_recall_10": 0.2,
+    "signchain_recall_10": 0.6,
+    "baseline_inversions": 2004,
+    "signchain_inversions": 1169,
+    "baseline_rho": 0.2657,
+    "signchain_rho": 0.68,
+    "delta_inversions": 835,
+    "delta_recall": 0.39999999999999997
+  }
+}

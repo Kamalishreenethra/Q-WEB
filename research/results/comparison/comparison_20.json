@@ -1,0 +1,58 @@
+{
+  "experiment_id": "track_b_20_seed42",
+  "timestamp_utc": "2026-08-16T15:22:46.452830+00:00",
+  "workload_size": 20,
+  "seed": 42,
+  "certificate_count": 5,
+  "graph_nodes": 25,
+  "graph_edges": 24,
+  "ground_truth_count": 5,
+  "critical_targets_count": 0,
+  "baseline": {
+    "method": "Flat Cryptographic Inventory \u2014 sort by algorithm vulnerability and key size",
+    "top_k_recall": {
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "recall@20": 1.0
+    },
+    "spearman_rho": 0.5,
+    "spearman_pval": 0.391002,
+    "priority_inversions": 4,
+    "critical_miss_rate_top10": 0.0
+  },
+  "signchain": {
+    "method": "Dependency-Aware PQC Migration Prioritization Engine (production weights)",
+    "top_k_recall": {
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "recall@20": 1.0
+    },
+    "spearman_rho": 1.0,
+    "spearman_pval": 0.0,
+    "priority_inversions": 0,
+    "critical_miss_rate_top10": 0.0
+  },
+  "ablation": {
+    "model_a_risk_only": {
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "recall@20": 1.0
+    },
+    "model_b_risk_dep": {
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "recall@20": 1.0
+    },
+    "model_d_full_signchain": {
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "recall@20": 1.0
+    }
+  },
+  "statistical_test": {
+    "test_name": "Wilcoxon Signed-Rank Test",
+    "rationale": "Non-parametric paired test suitable for ordinal rank deviation data without normality assumption.",
+    "note": "Insufficient paired samples (5) for Wilcoxon test.",
+    "n_pairs": 5
+  }
+}

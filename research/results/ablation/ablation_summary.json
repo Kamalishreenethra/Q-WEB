@@ -1,0 +1,173 @@
+{
+  "100": {
+    "baseline": {
+      "recall@5": 0.0,
+      "recall@10": 0.5,
+      "recall@20": 1.0,
+      "spearman_rho": 0.1865,
+      "spearman_pval": 0.431195,
+      "priority_inversions": 85,
+      "critical_miss_rate_top10": 1.0,
+      "high_impact_recall_top10": 0.5714,
+      "order_agreement": 0.5526
+    },
+    "model_a_crypto_only": {
+      "recall@5": 0.2,
+      "recall@10": 0.5,
+      "recall@20": 1.0,
+      "spearman_rho": 0.3083,
+      "spearman_pval": 0.186056,
+      "priority_inversions": 75,
+      "critical_miss_rate_top10": 1.0,
+      "high_impact_recall_top10": 0.5714,
+      "order_agreement": 0.6053
+    },
+    "model_b_crypto_dep": {
+      "recall@5": 0.2,
+      "recall@10": 0.7,
+      "recall@20": 1.0,
+      "spearman_rho": 0.6692,
+      "spearman_pval": 0.001253,
+      "priority_inversions": 46,
+      "critical_miss_rate_top10": 0.0,
+      "high_impact_recall_top10": 1.0,
+      "order_agreement": 0.7579
+    },
+    "model_c_crypto_dep_readiness": {
+      "recall@5": 0.2,
+      "recall@10": 0.7,
+      "recall@20": 1.0,
+      "spearman_rho": 0.6647,
+      "spearman_pval": 0.001389,
+      "priority_inversions": 47,
+      "critical_miss_rate_top10": 0.0,
+      "high_impact_recall_top10": 1.0,
+      "order_agreement": 0.7526
+    },
+    "model_d_full_signchain": {
+      "recall@5": 0.2,
+      "recall@10": 0.7,
+      "recall@20": 1.0,
+      "spearman_rho": 0.6331,
+      "spearman_pval": 0.002734,
+      "priority_inversions": 49,
+      "critical_miss_rate_top10": 0.0,
+      "high_impact_recall_top10": 0.8571,
+      "order_agreement": 0.7421
+    }
+  },
+  "500": {
+    "baseline": {
+      "recall@5": 0.0,
+      "recall@10": 0.2,
+      "recall@20": 0.3,
+      "spearman_rho": 0.2657,
+      "spearman_pval": 0.00754,
+      "priority_inversions": 2004,
+      "critical_miss_rate_top10": 0.7273,
+      "high_impact_recall_top10": 0.2162,
+      "order_agreement": 0.5952
+    },
+    "model_a_crypto_only": {
+      "recall@5": 0.4,
+      "recall@10": 0.5,
+      "recall@20": 0.4,
+      "spearman_rho": 0.4213,
+      "spearman_pval": 1.3e-05,
+      "priority_inversions": 1675,
+      "critical_miss_rate_top10": 0.4545,
+      "high_impact_recall_top10": 0.2703,
+      "order_agreement": 0.6616
+    },
+    "model_b_crypto_dep": {
+      "recall@5": 0.4,
+      "recall@10": 0.6,
+      "recall@20": 0.6,
+      "spearman_rho": 0.6572,
+      "spearman_pval": 0.0,
+      "priority_inversions": 1204,
+      "critical_miss_rate_top10": 0.3636,
+      "high_impact_recall_top10": 0.2703,
+      "order_agreement": 0.7568
+    },
+    "model_c_crypto_dep_readiness": {
+      "recall@5": 0.4,
+      "recall@10": 0.6,
+      "recall@20": 0.6,
+      "spearman_rho": 0.6968,
+      "spearman_pval": 0.0,
+      "priority_inversions": 1131,
+      "critical_miss_rate_top10": 0.3636,
+      "high_impact_recall_top10": 0.2703,
+      "order_agreement": 0.7715
+    },
+    "model_d_full_signchain": {
+      "recall@5": 0.4,
+      "recall@10": 0.6,
+      "recall@20": 0.6,
+      "spearman_rho": 0.68,
+      "spearman_pval": 0.0,
+      "priority_inversions": 1169,
+      "critical_miss_rate_top10": 0.3636,
+      "high_impact_recall_top10": 0.2703,
+      "order_agreement": 0.7638
+    }
+  },
+  "1000": {
+    "baseline": {
+      "recall@5": 0.0,
+      "recall@10": 0.0,
+      "recall@20": 0.15,
+      "spearman_rho": 0.162,
+      "spearman_pval": 0.02193,
+      "priority_inversions": 8898,
+      "critical_miss_rate_top10": 0.931,
+      "high_impact_recall_top10": 0.0417,
+      "order_agreement": 0.5529
+    },
+    "model_a_crypto_only": {
+      "recall@5": 0.2,
+      "recall@10": 0.1,
+      "recall@20": 0.25,
+      "spearman_rho": 0.3331,
+      "spearman_pval": 1e-06,
+      "priority_inversions": 7505,
+      "critical_miss_rate_top10": 0.7931,
+      "high_impact_recall_top10": 0.1389,
+      "order_agreement": 0.6229
+    },
+    "model_b_crypto_dep": {
+      "recall@5": 0.4,
+      "recall@10": 0.5,
+      "recall@20": 0.55,
+      "spearman_rho": 0.5675,
+      "spearman_pval": 0.0,
+      "priority_inversions": 5755,
+      "critical_miss_rate_top10": 0.6552,
+      "high_impact_recall_top10": 0.1389,
+      "order_agreement": 0.7108
+    },
+    "model_c_crypto_dep_readiness": {
+      "recall@5": 0.4,
+      "recall@10": 0.5,
+      "recall@20": 0.55,
+      "spearman_rho": 0.5985,
+      "spearman_pval": 0.0,
+      "priority_inversions": 5392,
+      "critical_miss_rate_top10": 0.6552,
+      "high_impact_recall_top10": 0.1389,
+      "order_agreement": 0.729
+    },
+    "model_d_full_signchain": {
+      "recall@5": 0.4,
+      "recall@10": 0.5,
+      "recall@20": 0.55,
+      "spearman_rho": 0.5961,
+      "spearman_pval": 0.0,
+      "priority_inversions": 5431,
+      "critical_miss_rate_top10": 0.6552,
+      "high_impact_recall_top10": 0.1389,
+      "order_agreement": 0.7271
+    }
+  }
+}
