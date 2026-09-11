@@ -102,9 +102,6 @@ For full architectural specs, see [docs/architecture.md](file:///c:/Users/HP/Sig
 
 ### Installation
 ```powershell
-# Clone workspace repository
-git clone https://github.com/adpooja-2007/QNET-.git signchain
-cd signchain
 
 # Create virtual environment
 python -m venv .venv
