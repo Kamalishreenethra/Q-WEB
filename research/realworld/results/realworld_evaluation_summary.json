@@ -1,0 +1,392 @@
+{
+  "evaluation_timestamp": "2026-08-16T17:58:15Z",
+  "total_cases": 10,
+  "discovered_count": 10,
+  "verified_count": 10,
+  "case_results": [
+    {
+      "case_id": "rw-cs1-isrg-root-x1",
+      "case_set": "CASE_SET_1",
+      "project": "Let's Encrypt",
+      "filename": "isrgrootx1.pem",
+      "file_sha256": "22b557a27055b33606b6559f37703928d3e4ad79f110b407d04986e1843543d1",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "X509Scanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "RSA-4096",
+      "quantum_status": "VULNERABLE",
+      "risk_score": 56.0,
+      "independent_verifier": "cryptography.x509 / OpenSSL",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "cryptography.x509",
+        "reference_public_key": "RSAPublicKey",
+        "discrepancies": []
+      },
+      "discrepancies": []
+    },
+    {
+      "case_id": "rw-cs1-lets-encrypt-r3",
+      "case_set": "CASE_SET_1",
+      "project": "Let's Encrypt",
+      "filename": "lets-encrypt-r3.pem",
+      "file_sha256": "177e1b8fc43b722b393f4200ff4d92e32deeffbb76fef5ee68d8f49c88cf9d32",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "X509Scanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "RSA-2048",
+      "quantum_status": "VULNERABLE",
+      "risk_score": 62.0,
+      "independent_verifier": "cryptography.x509 / OpenSSL",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "cryptography.x509",
+        "reference_public_key": "RSAPublicKey",
+        "discrepancies": []
+      },
+      "discrepancies": []
+    },
+    {
+      "case_id": "rw-cs1-lets-encrypt-e1",
+      "case_set": "CASE_SET_1",
+      "project": "Let's Encrypt",
+      "filename": "lets-encrypt-e1.pem",
+      "file_sha256": "a0f7541863bf1c9e816ec22dc602e13993b0a23bddf4213e781187499b6199ff",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "X509Scanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "ECDSA-secp384r1",
+      "quantum_status": "VULNERABLE",
+      "risk_score": 60.5,
+      "independent_verifier": "cryptography.x509 / OpenSSL",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "cryptography.x509",
+        "reference_public_key": "ECPublicKey",
+        "discrepancies": []
+      },
+      "discrepancies": []
+    },
+    {
+      "case_id": "rw-cs2-cpython-sig",
+      "case_set": "CASE_SET_2",
+      "project": "CPython",
+      "filename": "Python-3.11.8.tar.xz.asc",
+      "file_sha256": "8919230598fb4da5a0383a68ce09256df97f25c4efe717f70d197c2f786359a3",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "PGPScanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "RSA-2048",
+      "quantum_status": "VULNERABLE",
+      "risk_score": 62.0,
+      "independent_verifier": "Independent RFC 4880 Parser / GnuPG",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "Independent RFC 4880 Parser / GnuPG",
+        "structural_match": true,
+        "discrepancies": []
+      },
+      "discrepancies": []
+    },
+    {
+      "case_id": "rw-cs2-thomas-wouters-key",
+      "case_set": "CASE_SET_2",
+      "project": "CPython",
+      "filename": "thomas-wouters-key.asc",
+      "file_sha256": "dc763ee99ab009cfae1af46866e7051dbb0ca08efb84ce7326391d4b3aad732c",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "PGPScanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "RSA-4096",
+      "quantum_status": "VULNERABLE",
+      "risk_score": 56.0,
+      "independent_verifier": "Independent RFC 4880 Parser / GnuPG",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "Independent RFC 4880 Parser / GnuPG",
+        "structural_match": true,
+        "discrepancies": []
+      },
+      "discrepancies": []
+    },
+    {
+      "case_id": "rw-cs3-openssl-sig",
+      "case_set": "CASE_SET_3",
+      "project": "OpenSSL",
+      "filename": "openssl-3.3.0.tar.gz.asc",
+      "file_sha256": "2378e19d165360b6969d3cfa2211968e4c98d7c349e9ac23963325e9e99633d0",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "PGPScanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "RSA-2048",
+      "quantum_status": "VULNERABLE",
+      "risk_score": 62.0,
+      "independent_verifier": "Independent RFC 4880 Parser / GnuPG",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "Independent RFC 4880 Parser / GnuPG",
+        "structural_match": true,
+        "discrepancies": []
+      },
+      "discrepancies": []
+    },
+    {
+      "case_id": "rw-cs4-windows-pe",
+      "case_set": "CASE_SET_4",
+      "project": "Microsoft Windows / PE Toolchain",
+      "filename": "notepad.exe",
+      "file_sha256": "3f543719a819a9769d8f138a02544f93af8b53ef1779a96bc2403715d9a55380",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "PEScanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "NONE",
+      "quantum_status": "NOT_APPLICABLE",
+      "risk_score": 0.0,
+      "independent_verifier": "pefile / cryptography.pkcs7",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "pefile",
+        "security_directory_present": false,
+        "discrepancies": []
+      },
+      "discrepancies": []
+    },
+    {
+      "case_id": "rw-cs5-cosign-bundle",
+      "case_set": "CASE_SET_5",
+      "project": "Sigstore Cosign",
+      "filename": "cosign-v2.2.4.sigstore.json",
+      "file_sha256": "58fb426ca4cf41a5e0afaf0dd612fd67461ee72829604fef233e3a0e1f6ed009",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "SigstoreScanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "UNKNOWN",
+      "quantum_status": "UNKNOWN",
+      "risk_score": 50.0,
+      "independent_verifier": "Sigstore Bundle v0.3 Specification / Cosign",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "Sigstore Bundle v0.3 Specification / Cosign",
+        "structural_match": true,
+        "discrepancies": []
+      },
+      "discrepancies": []
+    },
+    {
+      "case_id": "rw-cs5-cosign-fulcio-cert",
+      "case_set": "CASE_SET_5",
+      "project": "Sigstore Cosign",
+      "filename": "cosign-linux-amd64-keyless.pem",
+      "file_sha256": "b5898090ff73f866e23bc916af60a5e34f83599b37b83b5c7bb00b909b45b7a6",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "X509Scanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "ECDSA-secp256r1",
+      "quantum_status": "VULNERABLE",
+      "risk_score": 60.5,
+      "independent_verifier": "cryptography.x509",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "cryptography.x509",
+        "reference_public_key": "ECPublicKey",
+        "discrepancies": []
+      },
+      "discrepancies": []
+    },
+    {
+      "case_id": "rw-cs6-distroless-base",
+      "case_set": "CASE_SET_6",
+      "project": "Google Container Tools (Distroless)",
+      "filename": "distroless-base.oci.json",
+      "file_sha256": "39f5756cefe4b9f7a5999c75268950e665d5ed4dc99e1bee4ccc8b9b614ae8a2",
+      "hash_verified": true,
+      "discovery_status": "DISCOVERED",
+      "scanner_used": "ContainerScanner",
+      "scan_status": "SUCCESS",
+      "detected_algorithm": "UNKNOWN",
+      "quantum_status": "UNKNOWN",
+      "risk_score": 50.0,
+      "independent_verifier": "OCI Image Specification v1 Parser",
+      "verification_result": {
+        "agreement_status": "VERIFIED",
+        "reference_tool": "OCI Image Specification v1 Parser",
+        "structural_match": true,
+        "discrepancies": []
+      },
+      "discrepancies": []
+    }
+  ],
+  "graph_summary": {
+    "node_count": 23,
+    "edge_count": 13,
+    "edges": [
+      {
+        "source": "art:isrgrootx1.pem",
+        "target": "cert:96bcec06264976f3",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:lets-encrypt-r3.pem",
+        "target": "cert:67add1166b020ae6",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:lets-encrypt-e1.pem",
+        "target": "cert:46494e30379059df",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:Python-3.11.8.tar.xz.asc",
+        "target": "cert:27a4a84037bd1a48",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:thomas-wouters-key.asc",
+        "target": "cert:e583c04ec647f943",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:thomas-wouters-key.asc",
+        "target": "cert:c5ca5d87c1f06343",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:thomas-wouters-key.asc",
+        "target": "cert:24d4983ff331cc10",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:thomas-wouters-key.asc",
+        "target": "cert:b783ea627de5a779",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:openssl-3.3.0.tar.gz.asc",
+        "target": "cert:3e29f76f14596bac",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:notepad.exe",
+        "target": "cert:notepad.exe",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:cosign-v2.2.4.sigstore.json",
+        "target": "cert:cosign-v2.2.4.si",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:cosign-linux-amd64-keyless.pem",
+        "target": "cert:d7b63c9688ca2a4c",
+        "type": null,
+        "confidence": "HIGH"
+      },
+      {
+        "source": "art:distroless-base.oci.json",
+        "target": "cert:distroless-base.",
+        "type": null,
+        "confidence": "HIGH"
+      }
+    ]
+  },
+  "prioritization_order": [
+    {
+      "rank": 1,
+      "target": "lets-encrypt-r3.pem",
+      "priority_score": 55.83,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 2,
+      "target": "Python-3.11.8.tar.xz.asc",
+      "priority_score": 55.83,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 3,
+      "target": "thomas-wouters-key.asc",
+      "priority_score": 55.83,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 4,
+      "target": "thomas-wouters-key.asc",
+      "priority_score": 55.83,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 5,
+      "target": "openssl-3.3.0.tar.gz.asc",
+      "priority_score": 55.83,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 6,
+      "target": "lets-encrypt-e1.pem",
+      "priority_score": 55.23,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 7,
+      "target": "cosign-linux-amd64-keyless.pem",
+      "priority_score": 55.23,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 8,
+      "target": "isrgrootx1.pem",
+      "priority_score": 53.43,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 9,
+      "target": "thomas-wouters-key.asc",
+      "priority_score": 53.43,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 10,
+      "target": "thomas-wouters-key.asc",
+      "priority_score": 53.43,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 11,
+      "target": "cosign-v2.2.4.sigstore.json",
+      "priority_score": 32.5,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 12,
+      "target": "distroless-base.oci.json",
+      "priority_score": 32.5,
+      "downstream_impact_count": null
+    },
+    {
+      "rank": 13,
+      "target": "notepad.exe",
+      "priority_score": 12.5,
+      "downstream_impact_count": null
+    }
+  ]
+}

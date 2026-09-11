@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../api/client';
 import { Badge } from '../components/Badge';
-import { LoadingSpinner, ErrorAlert, Pagination } from '../components/FeedbackComponents';
+import { LoadingSpinner, ErrorAlert, EmptyState, Pagination } from '../components/FeedbackComponents';
+import { GitPullRequest, RefreshCw } from 'lucide-react';
 import { MigrationResponse } from '../types/api';
 
 export const MigrationPage: React.FC = () => {
   const [assessments, setAssessments] = useState<MigrationResponse[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
-  const [pageSize] = useState<number>(20);
+  const [pageSize, setPageSize] = useState<number>(20);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +20,7 @@ export const MigrationPage: React.FC = () => {
 
   useEffect(() => {
     loadMigrationData();
-  }, [page, priority, status]);
+  }, [page, pageSize, priority, status]);
 
   async function loadMigrationData() {
     setLoading(true);
@@ -41,10 +42,21 @@ export const MigrationPage: React.FC = () => {
 
   return (
     <div>
-      <h1 className="page-title">Dependency-Aware Migration Roadmap & Prioritization</h1>
-      <p className="page-subtitle">
-        Topologically sorted migration sequence combining cryptographic vulnerability, NetworkX graph centrality, and downstream blast radius.
-      </p>
+      <div className="page-header">
+        <div>
+          <h1 className="page-title">
+            <GitPullRequest size={22} color="var(--color-primary)" />
+            Topological Migration Priority Roadmap
+          </h1>
+          <p className="page-subtitle">
+            Dependency-aware topological migration sequencing (P1 $
+ightarrow$ P4) resolving priority inversions across upstream certificate authorities and signing identities.
+          </p>
+        </div>
+        <button className="btn" onClick={loadMigrationData}>
+          <RefreshCw size={13} /> Refresh
+        </button>
+      </div>
 
       {/* Filter Bar */}
       <div className="filter-bar">
@@ -54,10 +66,10 @@ export const MigrationPage: React.FC = () => {
           onChange={(e) => { setPriority(e.target.value); setPage(1); }}
         >
           <option value="">All Priorities</option>
-          <option value="P1">P1 — Critical Priority (Immediate Action)</option>
+          <option value="P1">P1 — Critical (Immediate)</option>
           <option value="P2">P2 — High Priority</option>
           <option value="P3">P3 — Medium Priority</option>
-          <option value="P4">P4 — Low / Routine Migration</option>
+          <option value="P4">P4 — Low Priority</option>
         </select>
 
         <select
@@ -65,54 +77,64 @@ export const MigrationPage: React.FC = () => {
           value={status}
           onChange={(e) => { setStatus(e.target.value); setPage(1); }}
         >
-          <option value="">All Statuses</option>
-          <option value="ACTION_REQUIRED">Action Required</option>
-          <option value="PLANNED">Planned</option>
-          <option value="READY">Ready / Migrated</option>
+          <option value="">All Migration Statuses</option>
+          <option value="PENDING">PENDING</option>
+          <option value="IN_PROGRESS">IN_PROGRESS</option>
+          <option value="MIGRATED">MIGRATED</option>
         </select>
       </div>
 
-      {error && <ErrorAlert message={error} onRetry={loadMigrationData} />}
-
+      {/* Content */}
       {loading ? (
-        <LoadingSpinner message="Generating dependency-aware migration prioritization..." />
+        <LoadingSpinner message="Calculating topological migration sequences..." />
+      ) : error ? (
+        <ErrorAlert message={error} onRetry={loadMigrationData} />
       ) : assessments.length === 0 ? (
-        <div className="state-box">
-          <p>No migration priority records match the selected filter.</p>
+        <div className="card">
+          <EmptyState
+            title="No Migration Priorities Generated"
+            description="Migration priorities are computed by analyzing graph centrality and downstream transitive dependencies in NetworkX."
+            actionCommand="signchain store /path/to/artifact.exe"
+            onRefresh={loadMigrationData}
+          />
         </div>
       ) : (
-        <div className="card" style={{ padding: 0 }}>
-          <div className="table-container" style={{ border: 'none' }}>
+        <div className="card" style={{ padding: '16px' }}>
+          <div className="table-container">
             <table className="data-table">
               <thead>
                 <tr>
                   <th>Rank</th>
-                  <th>Priority</th>
-                  <th>Priority Score</th>
+                  <th>Artifact</th>
+                  <th>Tier</th>
+                  <th>Score</th>
                   <th>Status</th>
-                  <th>Recommended Action</th>
+                  <th>Recommended Action Plan</th>
                   <th>Rationale</th>
                 </tr>
               </thead>
               <tbody>
                 {assessments.map((m, index) => (
                   <tr key={m.id}>
-                    <td style={{ fontWeight: 700, color: 'var(--color-primary)' }}>
+                    <td style={{ fontWeight: 700, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
                       #{(page - 1) * pageSize + index + 1}
+                    </td>
+                    <td>
+                      <code style={{ fontSize: '11px', color: 'var(--color-primary)' }}>
+                        {m.artifact_id.slice(0, 12)}...
+                      </code>
                     </td>
                     <td><Badge label={m.priority_code} /></td>
                     <td>
-                      <span style={{ fontSize: '16px', fontWeight: 700, color: '#fff' }}>
+                      <span style={{ fontSize: '15px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#fff' }}>
                         {m.priority_score.toFixed(1)}
                       </span>
                     </td>
                     <td><Badge label={m.migration_status} /></td>
-                    <td>
-                      <div style={{ color: '#fff', fontWeight: 500, fontSize: '13px' }}>
-                        {m.recommended_action}
-                      </div>
+                    <td style={{ fontSize: '12px', color: '#fff', maxWidth: '300px' }}>
+                      {m.recommended_action}
                     </td>
-                    <td style={{ fontSize: '12px', color: 'var(--text-muted)', maxWidth: '350px' }}>
+                    <td style={{ fontSize: '11px', color: 'var(--text-muted)', maxWidth: '300px' }}>
                       {m.rationale}
                     </td>
                   </tr>
@@ -121,15 +143,14 @@ export const MigrationPage: React.FC = () => {
             </table>
           </div>
 
-          <div style={{ padding: '0 16px' }}>
-            <Pagination
-              page={page}
-              totalPages={totalPages}
-              totalItems={total}
-              pageSize={pageSize}
-              onPageChange={setPage}
-            />
-          </div>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            totalItems={total}
+            pageSize={pageSize}
+            onPageChange={setPage}
+            onPageSizeChange={(newSize) => { setPageSize(newSize); setPage(1); }}
+          />
         </div>
       )}
     </div>

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Unit tests for SignChain FastAPI REST API endpoints, pagination, filtering, and CLI commands.
 """
 import json
@@ -186,17 +186,39 @@ def test_not_found_handling(api_client):
     assert client.get("/graph/non_existent_id").status_code == 404
 
 
-def test_cli_store_and_serve_help(tmp_path: Path):
+def test_cli_store_and_serve_help(tmp_path: Path, monkeypatch):
+    # --- Database isolation: redirect CLI store to a temporary database ---
+    test_db_path = tmp_path / "test_cli_signchain.db"
+    test_engine = create_engine(
+        f"sqlite:///{test_db_path}",
+        connect_args={"check_same_thread": False},
+    )
+    Base.metadata.create_all(bind=test_engine)
+    IsolatedSessionLocal = sessionmaker(
+        autocommit=False, autoflush=False, bind=test_engine,
+    )
+
+    import signchain.db.session as _session_mod
+    monkeypatch.setattr(_session_mod, "engine", test_engine)
+    monkeypatch.setattr(_session_mod, "SessionLocal", IsolatedSessionLocal)
+
     cert_pem, _ = generate_rsa_certificate(key_size=2048)
     cert_file = tmp_path / "cli_cert.pem"
     cert_file.write_bytes(cert_pem)
 
-    # Test CLI store command
+    # Test CLI store command (now writes to isolated temp database)
     res = runner.invoke(cli_app, ["store", str(cert_file)])
     assert res.exit_code == 0
     assert "Successfully stored scan record" in res.stdout
+
+    # Verify the record landed in the isolated database, not the real one
+    iso_session = IsolatedSessionLocal()
+    from signchain.db.models import Scan
+    assert iso_session.query(Scan).count() == 1
+    iso_session.close()
 
     # Test CLI serve --help command
     help_res = runner.invoke(cli_app, ["serve", "--help"])
     assert help_res.exit_code == 0
     assert "Start the SignChain FastAPI REST API backend server" in help_res.stdout
+

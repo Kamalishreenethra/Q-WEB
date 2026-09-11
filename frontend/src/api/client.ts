@@ -1,5 +1,6 @@
 /**
  * Typed REST API Client for SignChain Backend.
+ * Features resilient error handling, non-JSON detection, and configurable base URL.
  */
 import {
   PaginatedResponse,
@@ -14,39 +15,81 @@ import {
   GraphResponse,
 } from '../types/api';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+
+export class ApiError extends Error {
+  status?: number;
+  endpoint: string;
+  isHtmlFallback: boolean;
+
+  constructor(message: string, endpoint: string, status?: number, isHtmlFallback = false) {
+    super(message);
+    this.name = 'ApiError';
+    this.endpoint = endpoint;
+    this.status = status;
+    this.isHtmlFallback = isHtmlFallback;
+  }
+}
 
 async function fetchJson<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  const url = `${BASE_URL}${endpoint}`;
+  const cleanBase = BASE_URL.endsWith('/') ? BASE_URL.slice(0, -1) : BASE_URL;
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = `${cleanBase}${cleanEndpoint}`;
+
+  let res: Response;
   try {
-    const res = await fetch(url, {
+    res = await fetch(url, {
       ...options,
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
         ...options?.headers,
       },
     });
-
-    if (!res.ok) {
-      let errorMsg = `HTTP Error ${res.status}: ${res.statusText}`;
-      try {
-        const errorJson = await res.json();
-        if (errorJson.detail) {
-          errorMsg = errorJson.detail;
-        }
-      } catch {
-        // Fallback to generic message
-      }
-      throw new Error(errorMsg);
-    }
-
-    return await res.json();
   } catch (err: any) {
-    if (err.name === 'TypeError' && err.message.includes('fetch')) {
-      throw new Error(`Unable to connect to SignChain API at ${url}. Ensure the backend server is running.`);
-    }
-    throw err;
+    throw new ApiError(
+      `Unable to connect to SignChain API at ${url}. Ensure the backend server is running on port 8000.`,
+      cleanEndpoint,
+      undefined,
+      false
+    );
   }
+
+  const contentType = res.headers.get('content-type') || '';
+
+  // Detect non-JSON responses (e.g. HTML fallback from Vite when route not found or backend offline)
+  if (!contentType.includes('application/json')) {
+    const rawText = await res.text();
+    if (rawText.includes('<!DOCTYPE') || rawText.includes('<html')) {
+      throw new ApiError(
+        `Backend route unavailable (received HTML instead of JSON for ${cleanEndpoint}). Check that the backend is running.`,
+        cleanEndpoint,
+        res.status,
+        true
+      );
+    }
+    throw new ApiError(
+      `Invalid response format from server (${contentType || 'unknown'}). Expected JSON.`,
+      cleanEndpoint,
+      res.status,
+      false
+    );
+  }
+
+  if (!res.ok) {
+    let errorMsg = `HTTP Error ${res.status}: ${res.statusText}`;
+    try {
+      const errorJson = await res.json();
+      if (errorJson.detail) {
+        errorMsg = typeof errorJson.detail === 'string' ? errorJson.detail : JSON.stringify(errorJson.detail);
+      }
+    } catch {
+      // Keep default error message
+    }
+    throw new ApiError(errorMsg, cleanEndpoint, res.status, false);
+  }
+
+  return await res.json();
 }
 
 export const api = {

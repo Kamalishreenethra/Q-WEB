@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.manifest.v1+json",
+  "config": {
+    "mediaType": "application/vnd.oci.image.config.v1+json",
+    "digest": "sha256:8a13a0937a09804b40810ffb088e5b4c10c144e3ef4430e386cc0bf52b86b459",
+    "size": 1471
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:716f8490a615e4518bb1d87e07a685cb5d7b4dbf4d1e2e92cbb3e01bc6f32e92",
+      "size": 1872392
+    },
+    {
+      "mediaType": "application/vnd.dev.cosign.simplesigning.v1+json",
+      "digest": "sha256:cosign_signature_layer_sha256_placeholder",
+      "size": 820,
+      "annotations": {
+        "dev.cosignproject.cosign/signature": "MEUCIQC18...sig...",
+        "dev.cosignproject.cosign/certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQW02Z0F3SUJBZ0lVU3owNGZwdU4xR1lRRnRlWUlubVpIRkwzam4wd0NnWUlLb1pJemowRUF3TXcKTnpFVk1CTUdBMVVFQ2hNTWMybG5jM1J2Y21VdVpHVjJNUjR3SEFZRFZRUURFeFZ6YVdkemRHOXlaUzFwYm5SbApjbTFsWkdsaGRHVXdIaGNOTWpRd05ERXdNakl3T1RJeFdoY05NalF3TkRFd01qSXhPVEl4V2pBQU1Ga3dFd1lICktvWkl6ajBDQVFZSUtvWkl6ajBEQVFjRFFnQUVueGR4Mm96andFRk9acFJLY3NPQ0NEeWEyc01STkk2TmRzazAKenY5dlQ4ekdkbjF0dzBvR01UakhsM01qY1FYL3cvTTBFQkdYMGQyamRSbzVrdVZpbmFPQ0FZMHdnZ0dKTUE0RwpBMVVkRHdFQi93UUVBd0lIZ0RBVEJnTlZIU1VFRERBS0JnZ3JCZ0VGQlFjREF6QWRCZ05WSFE0RUZnUVVLYUEvClZCSVBWTUtHTUlrcVFRdkV3S0hmUUdFd0h3WURWUjBqQkJnd0ZvQVUzOVBwejFZa0VaYjVxTmpwS0ZXaXhpNFkKWkQ4d1BRWURWUjBSQVFIL0JETXdNWUV2YTJWNWJHVnpjMEJ3Y205cVpXTjBjMmxuYzNSdmNtVXVhV0Z0TG1kegpaWEoyYVdObFlXTmpiM1Z1ZEM1amIyMHdLUVlLS3dZQkJBR0R2ekFCQVFRYmFIUjBjSE02THk5aFkyTnZkVzUwCmN5NW5iMjluYkdVdVkyOXRNQ3NHQ2lzR0FRUUJnNzh3QVFnRUhRd2JhSFIwY0hNNkx5OWhZMk52ZFc1MGN5NW4KYjI5bmJHVXVZMjl0TUlHS0Jnb3JCZ0VFQWRaNUFnUUNCSHdFZWdCNEFIWUEzVDB3YXNiSEVUSmpHUjRjbVdjMwpBcUpLWHJqZVBLMy9oNHB5Z0M4cDdvNEFBQUdPeWc3MFVnQUFCQU1BUnpCRkFpQi9MWHdJRFRid1A2MzNNNEVXCmxiaUxjeGFac2tvb0VUTzdrd1YwZEZVOHdBSWhBTXZ1clh4SW1yc2lJczd4R1FNNDJiMU5Hb2h2ZDUvVHZXazgKRVplZ1BxVWVNQW9HQ0NxR1NNNDlCQU1EQTJjQU1HUUNNSHMxV3AzbkIrYVdlY1JWVjhLSmR1a0ZqY0xFdGl6WAovbkFxUDF3RE5vQUpEcmxQYmJ1VTMzcUFKdjViUmZQRFpnSXdWTXdhYjZQWm1RZnFqQkVtTXpuTmR3dDVpcnU2CldyQTRuQ3NBcVlsbEdKeDc3TGpjQTBET0xicFVpLzNsRWNIOQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+      }
+    }
+  ],
+  "annotations": {
+    "org.opencontainers.image.url": "https://github.com/GoogleContainerTools/distroless",
+    "org.opencontainers.image.version": "base-debian12",
+    "dev.cosignproject.cosign/signing_identity": "https://github.com/GoogleContainerTools/distroless/.github/workflows/release.yaml@refs/heads/main"
+  }
+}

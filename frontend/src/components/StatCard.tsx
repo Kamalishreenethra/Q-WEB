@@ -2,26 +2,38 @@ import React from 'react';
 
 interface StatCardProps {
   label: string;
-  value: string | number;
+  value: number | string;
   subtext?: string;
   icon?: React.ReactNode;
-  variant?: 'default' | 'critical' | 'warning' | 'success';
+  variant?: 'default' | 'critical' | 'success' | 'pqc';
+  trend?: string;
 }
 
-export const StatCard: React.FC<StatCardProps> = ({ label, value, subtext, icon, variant = 'default' }) => {
-  const valueColor =
-    variant === 'critical' ? 'var(--status-critical)' :
-    variant === 'warning' ? 'var(--status-high)' :
-    variant === 'success' ? 'var(--status-low)' : '#fff';
-
+export const StatCard: React.FC<StatCardProps> = ({
+  label,
+  value,
+  subtext,
+  icon,
+  variant = 'default',
+  trend,
+}) => {
   return (
-    <div className="stat-card">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className={`stat-card variant-${variant}`}>
+      <div className="stat-header">
         <span className="stat-label">{label}</span>
-        {icon && <span style={{ color: 'var(--text-muted)' }}>{icon}</span>}
+        {icon && <div className="stat-icon">{icon}</div>}
       </div>
-      <div className="stat-value" style={{ color: valueColor }}>{value}</div>
-      {subtext && <div className="stat-subtext">{subtext}</div>}
+      <div className="stat-value">{typeof value === 'number' ? value.toLocaleString() : value}</div>
+      {(subtext || trend) && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '2px' }}>
+          {subtext && <span className="stat-subtext">{subtext}</span>}
+          {trend && (
+            <span style={{ fontSize: '11px', color: 'var(--color-primary)', fontWeight: 600 }}>
+              {trend}
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -3,8 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { api } from '../api/client';
 import { Badge } from '../components/Badge';
 import { LoadingSpinner, ErrorAlert } from '../components/FeedbackComponents';
-import { ArtifactDetailResponse, SignatureResponse } from '../types/api';
-import { ArrowLeft, AlertTriangle, Zap, GitPullRequest, KeyRound } from 'lucide-react';
+import { ArtifactDetailResponse } from '../types/api';
+import { ArrowLeft, AlertTriangle, Zap, GitPullRequest, KeyRound, ShieldAlert } from 'lucide-react';
 
 export const ArtifactDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,9 +29,9 @@ export const ArtifactDetailPage: React.FC = () => {
     }
   }
 
-  if (loading) return <LoadingSpinner message="Loading cryptographic profile and engine assessments..." />;
+  if (loading) return <LoadingSpinner message="Querying artifact cryptographic evidence..." />;
   if (error) return <ErrorAlert message={error} onRetry={() => id && loadDetail(id)} />;
-  if (!artifact) return <div className="state-box">Artifact not found.</div>;
+  if (!artifact) return <ErrorAlert message="Artifact not found in database." />;
 
   const risk = artifact.risk_assessment;
   const pqc = artifact.pqc_assessment;
@@ -40,164 +40,137 @@ export const ArtifactDetailPage: React.FC = () => {
   return (
     <div>
       <div style={{ marginBottom: '16px' }}>
-        <Link to="/artifacts" className="btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-          <ArrowLeft size={14} /> Back to Inventory
+        <Link to="/artifacts" className="btn" style={{ fontSize: '12px', padding: '4px 10px' }}>
+          <ArrowLeft size={13} /> Back to Asset Inventory
         </Link>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
+      <div className="page-header">
         <div>
-          <h1 className="page-title" style={{ fontSize: '24px' }}>{artifact.name}</h1>
-          <div style={{ color: 'var(--text-muted)', fontSize: '13px', display: 'flex', gap: '12px', alignItems: 'center' }}>
-            <span>Ecosystem: <Badge label={artifact.ecosystem} /></span>
-            <span>Type: <Badge label={artifact.artifact_type} type="info" /></span>
-          </div>
+          <h1 className="page-title">
+            <ShieldAlert size={22} color="var(--color-primary)" />
+            {artifact.name}
+          </h1>
+          <p className="page-subtitle" style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
+            ID: {artifact.id} · Ecosystem: {artifact.ecosystem} · Type: {artifact.artifact_type}
+          </p>
         </div>
       </div>
 
-      {/* Artifact Metadata Card */}
-      <div className="card">
-        <div className="card-title">Artifact Identification & Identity Bounds</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', fontSize: '13px' }}>
-          <div>
-            <span style={{ color: 'var(--text-muted)' }}>File Path:</span>
-            <div style={{ color: '#fff', wordBreak: 'break-all' }}>{artifact.path}</div>
-          </div>
-          <div>
-            <span style={{ color: 'var(--text-muted)' }}>Cryptographic Digest (Immutable):</span>
-            <div style={{ color: 'var(--color-primary)' }}><code>{artifact.digest || 'N/A'}</code></div>
-          </div>
-          <div>
-            <span style={{ color: 'var(--text-muted)' }}>Registry / Repository / Tag:</span>
-            <div style={{ color: '#fff' }}>
-              {artifact.registry || 'N/A'} / {artifact.repository || 'N/A'} : {artifact.tag || 'N/A'}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Grid of Engine Assessments */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '20px' }}>
-        {/* 1. Cryptographic Signatures */}
-        <div className="card">
+      {/* 3 Pillar Summary Grid */}
+      <div className="stat-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+        {/* Risk Pillar */}
+        <div className="card" style={{ marginBottom: 0 }}>
           <div className="card-title">
-            <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <KeyRound size={16} color="var(--color-primary)" /> Signatures & Certificates
-            </span>
-          </div>
-          {artifact.signatures.length === 0 ? (
-            <p style={{ color: 'var(--text-muted)' }}>No cryptographic signatures discovered for this asset.</p>
-          ) : (
-            artifact.signatures.map((sig: SignatureResponse) => (
-              <div key={sig.id} style={{ padding: '12px', backgroundColor: 'var(--bg-main)', borderRadius: '6px', marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                  <Badge label={sig.status} />
-                  <span style={{ fontSize: '11px', color: 'var(--text-dim)' }}>{sig.verification_status}</span>
-                </div>
-                <div style={{ fontSize: '12px' }}>Algorithm: <strong style={{ color: '#fff' }}>{sig.algorithm}</strong></div>
-                {sig.certificate && (
-                  <div style={{ fontSize: '12px', marginTop: '6px' }}>
-                    <div>Subject: <span style={{ color: '#fff' }}>{sig.certificate.subject}</span></div>
-                    <div>Issuer: <span style={{ color: 'var(--text-muted)' }}>{sig.certificate.issuer}</span></div>
-                    <div style={{ marginTop: '4px' }}>
-                      Quantum Status: <Badge label={sig.certificate.quantum_status} />
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))
-          )}
-        </div>
-
-        {/* 2. Quantum Risk Assessment */}
-        <div className="card">
-          <div className="card-title">
-            <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <AlertTriangle size={16} color="var(--status-critical)" /> Quantum Risk Engine Assessment
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <AlertTriangle size={16} color="var(--status-critical)" />
+              Quantum Risk Assessment
             </span>
             {risk && <Badge label={risk.risk_level} />}
           </div>
           {risk ? (
             <div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '12px' }}>
-                <span style={{ fontSize: '32px', fontWeight: 700, color: '#fff' }}>{risk.risk_score.toFixed(1)}</span>
-                <span style={{ color: 'var(--text-muted)', fontSize: '12px' }}>/ 100 Risk Score</span>
+              <div style={{ fontSize: '28px', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-mono)' }}>
+                {risk.risk_score.toFixed(1)} <span style={{ fontSize: '14px', color: 'var(--text-dim)' }}>/ 100</span>
               </div>
-              <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '12px' }}>
+              <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '6px' }}>
                 {risk.calculation_explanation}
               </p>
-              <div style={{ fontSize: '11px', color: 'var(--text-dim)' }}>
-                Model Version: {risk.model_version}
-              </div>
             </div>
           ) : (
-            <p style={{ color: 'var(--text-muted)' }}>No risk assessment record available.</p>
+            <p style={{ fontSize: '12px', color: 'var(--text-dim)' }}>No risk assessment registered.</p>
           )}
         </div>
 
-        {/* 3. PQC Readiness Assessment */}
-        <div className="card">
+        {/* PQC Pillar */}
+        <div className="card" style={{ marginBottom: 0 }}>
           <div className="card-title">
-            <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Zap size={16} color="var(--color-primary)" /> PQC Readiness Assessment
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Zap size={16} color="var(--color-violet)" />
+              PQC Readiness Engine
             </span>
             {pqc && <Badge label={pqc.readiness_state} />}
           </div>
           {pqc ? (
-            <div style={{ fontSize: '13px' }}>
-              <div style={{ marginBottom: '8px' }}>
-                Migration Phase: <strong style={{ color: '#fff' }}>{pqc.migration_phase}</strong>
+            <div>
+              <div style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginBottom: '4px' }}>
+                Migration Phase: {pqc.migration_phase}
               </div>
-              {pqc.candidate_algorithms && pqc.candidate_algorithms.length > 0 && (
-                <div style={{ marginTop: '8px' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>Target PQC Algorithms:</span>
-                  <div style={{ display: 'flex', gap: '6px', marginTop: '4px', flexWrap: 'wrap' }}>
-                    {pqc.candidate_algorithms.map((c: any, i: number) => (
-                      <span key={i} className="badge badge-info">{typeof c === 'string' ? c : c.name}</span>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {pqc.blockers && pqc.blockers.length > 0 && (
-                <div style={{ marginTop: '12px' }}>
-                  <span style={{ color: 'var(--status-critical)' }}>Migration Blockers:</span>
-                  <ul style={{ paddingLeft: '18px', marginTop: '4px', fontSize: '12px', color: 'var(--text-muted)' }}>
-                    {pqc.blockers.map((b: any, i: number) => (
-                      <li key={i}>{typeof b === 'string' ? b : JSON.stringify(b)}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                {pqc.candidate_algorithms && pqc.candidate_algorithms.length > 0
+                  ? `Recommended: ${pqc.candidate_algorithms.map((c) => c.name).join(', ')}`
+                  : 'Requires post-quantum cryptographic upgrade.'}
+              </p>
             </div>
           ) : (
-            <p style={{ color: 'var(--text-muted)' }}>No PQC readiness evaluation available.</p>
+            <p style={{ fontSize: '12px', color: 'var(--text-dim)' }}>No PQC assessment registered.</p>
           )}
         </div>
 
-        {/* 4. Migration Prioritization */}
-        <div className="card">
+        {/* Migration Pillar */}
+        <div className="card" style={{ marginBottom: 0 }}>
           <div className="card-title">
-            <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <GitPullRequest size={16} color="var(--color-primary)" /> Migration Prioritization
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <GitPullRequest size={16} color="var(--color-primary)" />
+              Migration Prioritization
             </span>
             {mig && <Badge label={mig.priority_code} />}
           </div>
           {mig ? (
-            <div style={{ fontSize: '13px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span>Priority Tier: <strong style={{ color: '#fff' }}>{mig.priority_level}</strong></span>
-                <span>Priority Score: <strong style={{ color: 'var(--color-primary)' }}>{mig.priority_score.toFixed(1)}</strong></span>
+            <div>
+              <div style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginBottom: '4px' }}>
+                Score: {mig.priority_score.toFixed(1)} · {mig.migration_status}
               </div>
-              <div style={{ backgroundColor: 'var(--bg-main)', padding: '10px', borderRadius: '4px', marginBottom: '10px' }}>
-                <span style={{ color: 'var(--text-muted)', fontSize: '11px', textTransform: 'uppercase' }}>Recommended Action</span>
-                <div style={{ color: '#fff', fontWeight: 500 }}>{mig.recommended_action}</div>
-              </div>
-              <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{mig.rationale}</p>
+              <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                {mig.recommended_action}
+              </p>
             </div>
           ) : (
-            <p style={{ color: 'var(--text-muted)' }}>No migration priority record available.</p>
+            <p style={{ fontSize: '12px', color: 'var(--text-dim)' }}>No migration priority registered.</p>
           )}
         </div>
+      </div>
+
+      {/* Signature Chain Table */}
+      <div className="card" style={{ marginTop: '20px' }}>
+        <div className="card-title">
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <KeyRound size={16} color="var(--color-primary)" />
+            Observed Signature & Certificate Chains
+          </span>
+        </div>
+        {artifact.signatures.length === 0 ? (
+          <p style={{ fontSize: '12px', color: 'var(--text-dim)' }}>No signatures attached to this artifact.</p>
+        ) : (
+          <div className="table-container">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Ecosystem</th>
+                  <th>Signature Type</th>
+                  <th>Algorithm</th>
+                  <th>Verification</th>
+                  <th>Evidence Status</th>
+                  <th>Certificate Subject</th>
+                </tr>
+              </thead>
+              <tbody>
+                {artifact.signatures.map((s) => (
+                  <tr key={s.id}>
+                    <td><Badge label={s.ecosystem} /></td>
+                    <td>{s.signature_type}</td>
+                    <td><code>{s.algorithm}</code></td>
+                    <td><Badge label={s.verification_status} /></td>
+                    <td><Badge label={s.evidence_status} variant="info" /></td>
+                    <td style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                      {s.certificate?.subject || s.certificate_fingerprint || 'Embedded signature metadata'}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
